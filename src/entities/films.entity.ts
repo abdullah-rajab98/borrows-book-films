@@ -10,7 +10,7 @@ export class Film extends OBaseEntity {
     @Column()
     director: string;
 
-    @Column()
+    @Column({ default: true })
     status: boolean;
 
     @ManyToMany(() => User, user => user.films)

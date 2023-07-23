@@ -6,9 +6,6 @@ export class CreateBookDto {
 
     @ApiProperty()
     author: string;
-
-    @ApiProperty({ default: false })
-    status: boolean
 }
 
 export class UpdateBookDto extends PartialType(CreateBookDto) { }

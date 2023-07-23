@@ -10,7 +10,7 @@ export class Book extends OBaseEntity {
     @Column()
     author: string;
 
-    @Column({ default: false })
+    @Column({ default: true })
     status: boolean;
 
     @ManyToMany(() => User, user => user.books)

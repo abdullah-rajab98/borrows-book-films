@@ -6,9 +6,6 @@ export class CreateFilmDto {
 
     @ApiProperty()
     director: string
-
-    @ApiProperty()
-    status: boolean
 }
 
 export class UpdateFilmDto extends PartialType(CreateFilmDto) { }

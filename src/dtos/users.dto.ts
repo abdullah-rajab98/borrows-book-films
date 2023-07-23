@@ -8,4 +8,20 @@ export class CreateUserDto {
     status: boolean
 }
 
+export class assignBookDto {
+    @ApiProperty({})
+    userId: number;
+
+    @ApiProperty({})
+    bookId: number;
+}
+
+export class assignFilmDto {
+    @ApiProperty({})
+    userId: number;
+
+    @ApiProperty({})
+    filmId: number;
+}
+
 export class UpdateUserDto extends PartialType(CreateUserDto) { }

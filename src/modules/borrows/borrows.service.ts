@@ -15,41 +15,30 @@ export class BorrowsService {
         @InjectRepository(Film)
         private readonly filmRepository: Repository<Film>,
     ) { }
-    async borrowBook(userId: number, bookId: number): Promise<void> {
-        const user = await this.userRepository.findOneBy({ id: userId });
-        const book = await this.bookRepository.findOneBy({ id: bookId });
-
+    async borrowBook(userId: number, bookId: number) {
+        const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['books'] });
+        const book = await this.bookRepository.findOne({ where: { id: bookId, status: true } });
         if (!user || !book) {
             throw new Error('User or book not found');
         }
 
-        if (book.status == false) {
-            throw new Error('Book is not available');
-        }
-
-        user.books.push(book);
-        book.users.push(user);
-
+        user.books = [...user.books, book]
         await this.userRepository.save(user);
-        await this.bookRepository.save(book);
+        await this.bookRepository.update(book.id, { status: false })
+        return "sussec"
     }
 
-    async borrowFilm(userId: number, filmId: number): Promise<void> {
-        const user = await this.userRepository.findOneBy({ id: userId });
-        const film = await this.filmRepository.findOneBy({ id: filmId });
+    async borrowFilm(userId: number, filmId: number) {
+        const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['films'] });
+        const film = await this.filmRepository.findOne({ where: { id: filmId, status: true } });
 
         if (!user || !film) {
             throw new Error('User or book not found');
         }
 
-        if (film.status == false) {
-            throw new Error('Book is not available');
-        }
-
-        user.films.push(film);
-        film.users.push(user);
-
+        user.films = [...user.films, film]
         await this.userRepository.save(user);
-        await this.filmRepository.save(film);
+        await this.bookRepository.update(film.id, { status: false })
+        return "sussec"
     }
 }
