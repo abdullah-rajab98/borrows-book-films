@@ -4,8 +4,19 @@ export class CreateUserDto {
     @ApiProperty()
     name: string;
 
-    @ApiProperty({ default: false })
-    status: boolean
+    @ApiProperty()
+    email: string;
+
+    @ApiProperty()
+    password: string;
+}
+
+export class LoginDto {
+    @ApiProperty()
+    email: string;
+
+    @ApiProperty()
+    password: string;
 }
 
 export class assignBookDto {

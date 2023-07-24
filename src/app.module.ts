@@ -7,6 +7,8 @@ import { UserModule } from './modules/user/user.module';
 import { BookModule } from './modules/book/book.module';
 import { FilmModule } from './modules/film/film.module';
 import { BorrowsModule } from './modules/borrows/borrows.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { JwtStrategy } from './guards/jwt.strategy';
 
 @Module({
   imports: [
@@ -25,7 +27,8 @@ import { BorrowsModule } from './modules/borrows/borrows.module';
     UserModule,
     BookModule,
     FilmModule,
-    BorrowsModule],
+    BorrowsModule,
+    AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

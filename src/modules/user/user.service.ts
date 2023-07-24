@@ -8,7 +8,15 @@ import { Repository } from 'typeorm';
 export class UserService {
   constructor(@InjectRepository(User) private readonly repo: Repository<User>) { }
   async create(createUserDto: CreateUserDto) {
-    return await this.repo.save(createUserDto)
+    const user: User = {
+      name: createUserDto.name,
+      email: createUserDto.email,
+      password: createUserDto.password
+    }
+
+    const newUser = await this.repo.save(user)
+    delete newUser.password
+    return newUser
   }
 
   async findAll() {
@@ -17,6 +25,10 @@ export class UserService {
 
   async findOne(id: number) {
     return await this.repo.findOneBy({ id: id });
+  }
+
+  async findOneByEmail(email: string) {
+    return await this.repo.findOneBy({ email: email });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
