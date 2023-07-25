@@ -4,6 +4,7 @@ import { Film } from "./films.entity";
 import { OBaseEntity } from "./OBaseEntity";
 import { ApiProperty } from "@nestjs/swagger";
 import { OverrideUtils } from "../shared/override-utility";
+import { UserRole } from "../enums/role.enum";
 
 @Entity()
 export class User extends OBaseEntity {
@@ -28,6 +29,14 @@ export class User extends OBaseEntity {
         },
     })
     password: string;
+
+    @ApiProperty()
+    @Column({
+        type: 'enum',
+        enum: UserRole,
+        default: [UserRole.User]
+    })
+    role?: UserRole;
 
     @ManyToMany(() => Book)
     @JoinTable()

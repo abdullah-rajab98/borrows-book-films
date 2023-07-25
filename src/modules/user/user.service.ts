@@ -11,7 +11,8 @@ export class UserService {
     const user: User = {
       name: createUserDto.name,
       email: createUserDto.email,
-      password: createUserDto.password
+      password: createUserDto.password,
+      role:  createUserDto.role
     }
 
     const newUser = await this.repo.save(user)
